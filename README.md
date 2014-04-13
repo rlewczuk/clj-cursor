@@ -1,9 +1,9 @@
 # clj-cursor
 
-This library implements cursor on Clojure data structures. It is based on David Nolen concept
+This library implements cursor on Clojure data structures. It is based on David Nolen's concept
 implemented in the [om library](https://github.com/swannodette/om). Cursor allows storing whole
 application state in a signle structure, yet still be able to swap underlying application state
-without much hassle (think online reconfiguration etc.).
+and allow application components receiving changes without hassle (think online reconfiguration etc.).
 
 This is especially important for async processes/threads/loops/closures that receive some
 initial configuration and then keep it forever. When using raw immutable data structures
@@ -13,7 +13,9 @@ data structure representing application state. Each of these approaches has its 
 either some boilerplate code needs to be implemented, application components see state of other
 components (and need additional information where their own state is located) or application
 state isn't really immutable and data under references to some parts of app state can change
-in uncontrolled way. Cursor is an attempt to retain
+in uncontrolled way. Cursor is an attempt to supply application components with configuration/state
+they need and at the same time retain proper isolation of component data without boilerplate code
+nor special conventions.
 
 
 ## Usage
