@@ -33,6 +33,8 @@
       (is (= 3 @c2))
       (is (= {:a 3} @c1))
       (is (= {:a 3} @a1))
+      (is (= {:a 9} (update! c1 {:a 9})))
+      (is (= {:a 9} @c1))
   )))
 
 
@@ -44,6 +46,11 @@
     (is (= 3 @(get (cursor [3 4]) 0)))
     (is (= 3 @((cursor [3 4]) 0)))
     (is (= 2 (count (cursor [1 2]))))
+    (is (= 1 @(nth (cursor [1 2]) 0)))
+    (is (= 3 @(nth (cursor [1 2]) 3 3)))
+    (let [c1 (cursor [1 2])]
+      (is (= [3 4] (update! c1 [3 4])))
+      (is (= [3 4] @c1)))
   ))
 
 
