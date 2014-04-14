@@ -1,4 +1,4 @@
-(defproject clj-cursor "0.0.1"
+(defproject clj-cursor "0.0.2-SNAPSHOT"
   :description "Cursor for Clojure data structures"
   :url "https://github.com/rlewczuk/clj-cursor"
   :license {:name "Eclipse Public License"
