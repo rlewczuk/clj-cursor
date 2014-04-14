@@ -16,6 +16,7 @@
     (is (= nil @(get (cursor {:a 1}) :b)))
     (is (= 2 @(get (cursor {:a 1}) :b 2)))
     (is (= 1 (count (cursor {:a 1}))))
+    (is (= [[:a 1] [:b 2]] (for [[k c] (cursor {:a 1, :b 2})] [k @c])))
   ))
 
 

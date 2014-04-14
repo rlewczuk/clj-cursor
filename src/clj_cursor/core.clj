@@ -1,5 +1,5 @@
 (ns clj-cursor.core
-  (:import (clojure.lang IDeref Atom ILookup Counted IFn AFn Indexed)))
+  (:import (clojure.lang IDeref Atom ILookup Counted IFn AFn Indexed ISeq)))
 
 ; TODO not sure if these methods are needed at all; ICursor is used solely as a marker right now
 (defprotocol ICursor
@@ -85,6 +85,7 @@
   (nth [_ i not-found]
     (let [value (get-in @state path value)]
       (to-cursor (nth value i not-found) state (conj path i) not-found)))
+
   ITransact
   (-transact! [cursor f]
     (get-in

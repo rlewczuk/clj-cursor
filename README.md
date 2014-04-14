@@ -26,8 +26,9 @@ into local repository:
 ```bash
 git clone https://github.com/rlewczuk/clj-cursor clj-cursor
 cd clj-cursor
-lein install
-mvn install
+lein jar
+cd target/provided
+mvn deploy:deploy-file -DgroupId=clj-cursor -DartifactId=clj-cursor -Dversion=$VER -Dpackaging=jar -Dfile=clj-cursor-0.0.1.jar -Durl=file:~/.m2/repository
 ```
 
 Add the following dependency to your `project.clj` file:
