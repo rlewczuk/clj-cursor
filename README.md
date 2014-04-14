@@ -2,7 +2,7 @@
 
 This library implements cursor on Clojure data structures. It is based on David Nolen's concept
 implemented in the [om library](https://github.com/swannodette/om). Cursor allows storing whole
-application state in a signle structure, yet still be able to swap underlying application state
+application state in a single structure, yet still be able to swap underlying application state
 and allow application components receiving changes without hassle (think online reconfiguration etc.).
 
 This is especially important for async processes/threads/loops/closures that receive some
@@ -85,7 +85,7 @@ should now reflect change:
 
 ```clj
 @cur
-=> {:a "UH!", :b {:c 1, :d ["WHAA" "WOOO" "WEEE"]}}
+=> {:a "UH!", :c {:m 1, :d ["WHAA" "WOOO" "WEEE"]}}
 @another-cur
 => "UH!"
 ```

@@ -17,6 +17,7 @@
     (is (= 2 @(get (cursor {:a 1}) :b 2)))
     (is (= 1 (count (cursor {:a 1}))))
     (is (= [[:a 1] [:b 2]] (for [[k c] (cursor {:a 1, :b 2})] [k @c])))
+    (is (= [:a 1] (first (for [[k c] (cursor {:a 1, :b 2})] [k @c]))))
   ))
 
 
@@ -52,6 +53,9 @@
     (let [c1 (cursor [1 2])]
       (is (= [3 4] (update! c1 [3 4])))
       (is (= [3 4] @c1)))
+    (is (= [1 2 3] (for [v (cursor [1 2 3])] @v)))
+    (is (= 1 @(first (cursor [1 2 3]))))
+    (is (= [2 3] (for [v (rest (cursor [1 2 3]))] @v)))
   ))
 
 

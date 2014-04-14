@@ -1,5 +1,5 @@
 (ns clj-cursor.core
-  (:import (clojure.lang IDeref Atom ILookup Counted IFn AFn Indexed ISeq)))
+  (:import (clojure.lang IDeref Atom ILookup Counted IFn AFn Indexed ISeq Seqable)))
 
 ; TODO not sure if these methods are needed at all; ICursor is used solely as a marker right now
 (defprotocol ICursor
@@ -55,7 +55,11 @@
   (-transact! [cursor f]
     (get-in
       (swap! state (if (empty? path) f #(update-in % path f)))
-      path)))
+      path))
+  Seqable
+  (seq [this]
+    (for [[k v] @this]
+      [k (to-cursor v state (conj path k) nil)])))
 
 
 (deftype VecCursor [value state path]
@@ -85,12 +89,15 @@
   (nth [_ i not-found]
     (let [value (get-in @state path value)]
       (to-cursor (nth value i not-found) state (conj path i) not-found)))
-
   ITransact
   (-transact! [cursor f]
     (get-in
       (swap! state (if (empty? path) f #(update-in % path f)))
-      path)))
+      path))
+  Seqable
+  (seq [this]
+    (for [[v i] (map vector @this (range))]
+      (to-cursor v state (conj path i) nil))))
 
 
 (defn- to-cursor
